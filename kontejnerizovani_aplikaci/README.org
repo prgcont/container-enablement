@@ -1,0 +1,14 @@
+* Kontejnerizovani aplikaci
+
+** Lift & Shift
+
+*** Zpristupneni aplikace po siti
+build + run 
+
+#+begin_src bash
+docker build -t prgcont/container-enablement:lift-shift-port -f Dockerfile-port .
+
+docker run -p 8080:8080 prgcont/container-enablement:lift-shift-port
+#+end_src
+
+Web UI http://localhost:8080
