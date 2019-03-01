@@ -1,0 +1,26 @@
+FROM fedora:29
+
+RUN dnf install -y java-1.8.0-openjdk git curl
+
+ENV http_port 8080
+
+ENV UID 1000
+ENV GID 1000
+ENV USER jenkins
+ENV GROUP jenkins
+ENV JENKINS_HOME /var/jenkins_home
+ENV JENKINS_VERSION 2.150.3
+ENV JENKINS_URL https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
+
+RUN mkdir -p $JENKINS_HOME \
+  && chown ${UID}:${GID} $JENKINS_HOME \
+  && groupadd -g ${GID} ${GROUP} \
+  && useradd -d "$JENKINS_HOME" -u ${UID} -g ${GID} -m -s /bin/bash ${USER}
+
+ADD ${JENKINS_URL} /usr/share/jenkins/jenkins.war
+
+EXPOSE ${http_port}
+
+USER ${user}
+ 
+CMD ["java", "-Duser.home=\"$JENKINS_HOME\"", "-jar", "/usr/share/jenkins/jenkins.war"]
