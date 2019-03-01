@@ -1,8 +1,6 @@
-* Kontejnerizovani aplikaci
+* Lift & Shift
 
-** Lift & Shift
-
-*** Zpristupneni aplikace po siti
+** Zpristupneni aplikace po siti
 build + run 
 
 #+begin_src bash
@@ -17,7 +15,7 @@ docker run -p 8080:8080 prgcont/container-enablement:lift-shift-port
 
 Web UI http://localhost:8080
 
-*** Non-root user
+** Non-root user
 
 #+begin_src bash
 docker build -t prgcont/container-enablement:lift-shift-root -f Dockerfile-root .
@@ -27,7 +25,7 @@ docker run -p 8080:8080 prgcont/container-enablement:lift-shift-root
 
 Web UI http://localhost:8080
 
-*** Shell vs Exec form
+** Shell vs Exec form
 
 #+begin_src bash
 docker build -t prgcont/container-enablement:lift-shift-execForm -f Dockerfile-execForm .
@@ -38,3 +36,15 @@ docker run prgcont/container-enablement:lift-shift-shellForm
 #+end_src
 
 Watch output
+
+* Replatform
+
+** Configure user
+
+#+begin_src bash
+docker build -t prgcont/container-enablement:replatform-configUser -f Dockerfile-configUser .
+
+docker run -p 8080:8080 prgcont/container-enablement:replatform-configUser
+#+end_src
+
+Web UI http://localhost:8080

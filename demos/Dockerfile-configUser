@@ -2,7 +2,7 @@ FROM fedora:29
 
 RUN dnf install -y java-1.8.0-openjdk git curl
 
-ENV http_port 8080
+ENV HTTP_PORT 8080
 
 ENV UID 1000
 ENV GID 1000
@@ -17,10 +17,17 @@ RUN mkdir -p $JENKINS_HOME \
   && groupadd -g ${GID} ${GROUP} \
   && useradd -d "$JENKINS_HOME" -u ${UID} -g ${GID} -m -s /bin/bash ${USER}
 
+RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d /var/jenkins_home/init.groovy.d
+COPY setupUsers.groovy /var/jenkins_home/init.groovy.d/setupUsers.groovy
+
 ADD ${JENKINS_URL} /usr/share/jenkins/jenkins.war
 
-EXPOSE ${http_port}
+RUN chown -R ${USER} "$JENKINS_HOME" /usr/share/jenkins
 
-USER ${user}
- 
-CMD ["java", "-Duser.home=/var/jenkins_home", "-jar", "/usr/share/jenkins/jenkins.war"]
+EXPOSE ${HTTP_PORT}
+
+USER ${USER}
+
+COPY start_jenkins.sh /usr/local/bin/start_jenkins.sh
+
+CMD ["/usr/local/bin/start_jenkins.sh"]
