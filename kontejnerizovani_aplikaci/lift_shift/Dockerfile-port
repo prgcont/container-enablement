@@ -12,4 +12,4 @@ ADD ${JENKINS_URL} /usr/share/jenkins/jenkins.war
 
 EXPOSE ${http_port}
 
-CMD ["java", "-Duser.home=\"$JENKINS_HOME\"", "-jar", "/usr/share/jenkins/jenkins.war"]
+CMD ["java", "-Duser.home=/var/jenkins_home", "-jar", "/usr/share/jenkins/jenkins.war"]

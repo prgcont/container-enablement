@@ -23,4 +23,4 @@ EXPOSE ${http_port}
 
 USER ${user}
  
-CMD ["java", "-Duser.home=\"$JENKINS_HOME\"", "-jar", "/usr/share/jenkins/jenkins.war"]
+CMD ["java", "-Duser.home=/var/jenkins_home", "-jar", "/usr/share/jenkins/jenkins.war"]
