@@ -1,6 +1,6 @@
 FROM fedora:29
 
-RUN dnf install -y java-1.8.0-openjdk git curl strace
+RUN dnf install -y java-1.8.0-openjdk git curl
 
 ENV HTTP_PORT 8080
 
@@ -27,4 +27,4 @@ ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 
 USER ${USER}
 
-CMD ["strace", "java", "-Duser.home=/var/jenkins_home", "-jar", "/usr/share/jenkins/jenkins.war"]
+CMD ["java", "-Duser.home=/var/jenkins_home", "-jar", "/usr/share/jenkins/jenkins.war"]

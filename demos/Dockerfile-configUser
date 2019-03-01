@@ -17,14 +17,16 @@ RUN mkdir -p $JENKINS_HOME \
   && groupadd -g ${GID} ${GROUP} \
   && useradd -d "$JENKINS_HOME" -u ${UID} -g ${GID} -m -s /bin/bash ${USER}
 
-RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d /var/jenkins_home/init.groovy.d
-COPY setupUsers.groovy /var/jenkins_home/init.groovy.d/setupUsers.groovy
-
 ADD ${JENKINS_URL} /usr/share/jenkins/jenkins.war
 
-RUN chown -R ${USER} "$JENKINS_HOME" /usr/share/jenkins
+RUN mkdir -p /var/jenkins_home/init.groovy.d
+COPY setupUsers.groovy /var/jenkins_home/init.groovy.d/setupUsers.groovy
+
+RUN chown -R ${USER} "$JENKINS_HOME" /usr/share/jenkins/
 
 EXPOSE ${HTTP_PORT}
+
+ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 
 USER ${USER}
 
