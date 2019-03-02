@@ -48,3 +48,12 @@ docker run -p 8080:8080 prgcont/container-enablement:replatform-configUser
 #+end_src
 
 Web UI http://localhost:8080
+
+** Posilani signalu
+
+#+begin_src bash
+docker build -t prgcont/container-enablement:replatform-stopSignal -f Dockerfile-stopSignal .
+
+docker run prgcont/container-enablement:replatform-stopSignal
+#+end_src
+
