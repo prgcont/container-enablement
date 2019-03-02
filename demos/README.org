@@ -57,3 +57,10 @@ docker build -t prgcont/container-enablement:replatform-stopSignal -f Dockerfile
 docker run prgcont/container-enablement:replatform-stopSignal
 #+end_src
 
+* Refactor
+
+#+begin_src bash
+  docker build -t prgcont/container-enablement:refactor-goShutdown -f Dockerfile-goShutdown .
+
+  docker run prgcont/container-enablement:refactor-goShutdown
+#+end_src
