@@ -1,0 +1,9 @@
+FROM golang
+
+COPY sinalGo /go/src/app
+
+WORKDIR /go/src
+
+RUN go build -o /bin/app ./app/ 
+
+CMD ["/bin/app"]
