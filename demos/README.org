@@ -1,0 +1,59 @@
+* Lift & Shift
+
+** Zpristupneni aplikace po siti
+build + run 
+
+#+begin_src bash
+docker build -t prgcont/container-enablement:lift-shift-port -f Dockerfile-port .
+
+# Neposloucha
+docker run prgcont/container-enablement:lift-shift-port
+
+# Posloucha na 8080
+docker run -p 8080:8080 prgcont/container-enablement:lift-shift-port
+#+end_src
+
+Web UI http://localhost:8080
+
+** Non-root user
+
+#+begin_src bash
+docker build -t prgcont/container-enablement:lift-shift-root -f Dockerfile-root .
+
+docker run -p 8080:8080 prgcont/container-enablement:lift-shift-root
+#+end_src
+
+Web UI http://localhost:8080
+
+** Shell vs Exec form
+
+#+begin_src bash
+docker build -t prgcont/container-enablement:lift-shift-execForm -f Dockerfile-execForm .
+docker build -t prgcont/container-enablement:lift-shift-shellForm -f Dockerfile-shellForm .
+
+docker run prgcont/container-enablement:lift-shift-execForm
+docker run prgcont/container-enablement:lift-shift-shellForm
+#+end_src
+
+Watch output
+
+* Replatform
+
+** Configure user
+
+#+begin_src bash
+docker build -t prgcont/container-enablement:replatform-configUser -f Dockerfile-configUser .
+
+docker run -p 8080:8080 prgcont/container-enablement:replatform-configUser
+#+end_src
+
+Web UI http://localhost:8080
+
+** Posilani signalu
+
+#+begin_src bash
+docker build -t prgcont/container-enablement:replatform-stopSignal -f Dockerfile-stopSignal .
+
+docker run prgcont/container-enablement:replatform-stopSignal
+#+end_src
+

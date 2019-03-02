@@ -1,0 +1,22 @@
+FROM httpd
+
+STOPSIGNAL SIGWINCH
+
+CMD ["httpd-foreground"]
+
+# -------- trap
+# FROM httpd
+
+# COPY ./trap-apache.sh /trap-apache.sh
+# RUN chmod +x /trap-apache.sh
+# CMD ["/trap-apache.sh"]
+
+# ------- tini
+# FROM httpd
+
+# RUN apt-get update -y && \
+#   apt-get install -y curl
+# RUN curl -fsSL https://github.com/krallin/tini/releases/download/v0.18.0/tini-static-$(dpkg --print-architecture) -o /sbin/tini && \
+#   chmod +x /sbin/tini
+
+# CMD ["/sbin/tini", "httpd-foreground"]
